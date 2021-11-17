@@ -1,6 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
+  import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  const firebaseConfig = {
+  apiKey: "AIzaSyAbUGiz_rgo3WogtQ4byTXC81R6yzlWHG8",
+  authDomain: "repti-myst.firebaseapp.com",
+  databaseURL: "https://repti-myst-default-rtdb.firebaseio.com",
+  projectId: "repti-myst",
+  storageBucket: "repti-myst.appspot.com",
+  messagingSenderId: "1012392859431",
+  appId: "1:1012392859431:web:84863fcb04db4eb24f3b02",
+  measurementId: "G-MSSX60ZC64"
+};
+
+const app = initializeApp(firebaseConfig);
+  
+ <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.css" />
+  
+  // Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  
+  ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  // Other config options...
+});
+  
+  // Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+<h1>Welcome to My Awesome App</h1>
+<div id="firebaseui-auth-container"></div>
+<div id="loader">Loading...</div>
+  var uiConfig = {
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    }
+  },
+  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+  signInFlow: 'popup',
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>',
+  // Privacy policy url.
+  privacyPolicyUrl: '<your-privacy-policy-url>'
+};
+  // The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+  
+  
 <link rel="stylesheet" href="style.css">
 <title> Repti-Myst Login Page </title>
 </head>
@@ -15,7 +86,7 @@
           </div>
         </div>
         <form class="login-form">
-          <input type="text" placeholder="username"/>
+          <input type="text" placeholder="email"/>
           <input type="password" placeholder="password"/>
           <button>login</button>
           <p class="message">Not registered? <a href="#">Create an account</a></p>
